@@ -1,0 +1,64 @@
+<form [formGroup]="dropdownFormObj" (ngSubmit)="onSubmit()" class="form">
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="firstNameEle">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstNameEle"
+        placeholder="Enter first Name"
+        formControlName="firstName"
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          !dropdownFormObj.get('firstName').valid &&
+          dropdownFormObj.get('firstName').touched
+        "
+        >First Name is required</span
+      >
+    </div>
+    <div class="form-group col">
+      <label for="lastNameEle">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastNameEle"
+        placeholder="Enter last Name"
+        formControlName="lastName"
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          !dropdownFormObj.get('lastName').valid &&
+          dropdownFormObj.get('lastName').touched
+        "
+        >Last Name is required</span
+      >
+    </div>
+  </div>
+  
+    <div formGroupName="contactDetails" class="form-row">
+      <div class="form-group col">
+        <label>How should we contact you?</label><br />
+        <select formControlName="contactMethod">
+          <option value="">choose option</option>
+          <option value="phone">Phone</option>
+          <option value="email">Email</option>
+        </select>
+      </div>
+      <div class="col">
+        <div *ngIf="dropdownFormObj.get('contactDetails.contactMethod').value ==='phone'">
+          <label for="phone">phone Number</label><br />
+          <input type="text" formControlName="phoneNo" />
+        </div>
+        <div *ngIf="dropdownFormObj.get('contactDetails.contactMethod').value ==='email'">
+          <label for="email">Email Address</label><br>
+          <input type="email" formControlName="emailId" />
+        </div>
+      </div>
+    </div>
+  
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
